@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c384196a-1334-46bb-bb83-3c17803e8a62" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.babelrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/typing-speedometer.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rollup.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/testsSetup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RecursiveInput.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/randomColor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/App.test.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
+    <layout place="tools.popupnpm">
+      <scroll-view-position x="0" y="0" />
+      <selected-paths>
+        <path>
+          <id value="$PROJECT_DIR$/package.json" />
+          <id value="dev" />
+        </path>
+      </selected-paths>
+    </layout>
+  </component>
+  <component name="ProjectId" id="1hHLSU6c9pwXI0vXPsCoxssCeiU" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.last.introduce.type" value="CONST" />
+    <property name="nodejs.cucumber.cucumber_node_package_dir" value="" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="npm.build">
+    <configuration name="App.increments the counter" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/test/App.test.js" />
+      <test-names>
+        <test-name value="App" />
+        <test-name value="increments the counter" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="App.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/src/test/App.test.js" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest">
+      <config-file value="$PROJECT_DIR$/package.json" />
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <working-dir value="$PROJECT_DIR$" />
+      <jest-options value="--watch" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Jest.App.increments the counter" />
+      <item itemvalue="Jest.App.test.js" />
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.start" />
+      <item itemvalue="npm.build" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="Jest.App.test.js" />
+        <item itemvalue="Jest.App.increments the counter" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c384196a-1334-46bb-bb83-3c17803e8a62" name="Default Changelist" comment="" />
+      <created>1599663070202</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599663070202</updated>
+      <workItem from="1599663071234" duration="5170000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="744" y="395" width="1071" height="697" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599664535320">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="744" y="395" width="1071" height="697" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1599664535320" />
+    <state x="981" y="541" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599663501166">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="981" y="541" key="#com.intellij.fileTypes.FileTypeChooser/0.23.2560.1417@0.23.2560.1417" timestamp="1599663501166" />
+    <state x="1018" y="487" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599666120890">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1018" y="487" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1599666120890" />
+    <state width="2560" height="416" key="GridCell.Tab.0.bottom" timestamp="1599667680343">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2560" height="416" key="GridCell.Tab.0.bottom/0.23.2560.1417@0.23.2560.1417" timestamp="1599667680343" />
+    <state width="2560" height="416" key="GridCell.Tab.0.center" timestamp="1599667680342">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2560" height="416" key="GridCell.Tab.0.center/0.23.2560.1417@0.23.2560.1417" timestamp="1599667680342" />
+    <state width="2560" height="416" key="GridCell.Tab.0.left" timestamp="1599667680342">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2560" height="416" key="GridCell.Tab.0.left/0.23.2560.1417@0.23.2560.1417" timestamp="1599667680342" />
+    <state width="2560" height="416" key="GridCell.Tab.0.right" timestamp="1599667680342">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="2560" height="416" key="GridCell.Tab.0.right/0.23.2560.1417@0.23.2560.1417" timestamp="1599667680342" />
+    <state x="781" y="370" key="SettingsEditor" timestamp="1599666826648">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="781" y="370" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1599666826648" />
+    <state x="1010" y="470" width="540" height="524" key="StructurePopup" timestamp="1599664725215">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1010" y="470" width="540" height="524" key="StructurePopup/0.23.2560.1417@0.23.2560.1417" timestamp="1599664725215" />
+    <state width="500" height="445" key="SwitcherDM" timestamp="1599667647812">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state width="500" height="445" key="SwitcherDM/0.23.2560.1417@0.23.2560.1417" timestamp="1599667647812" />
+    <state x="902" y="350" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1599664430395">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="902" y="350" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.2560.1417@0.23.2560.1417" timestamp="1599664430395" />
+    <state x="1155" y="595" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup" timestamp="1599666329450">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1155" y="595" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup/0.23.2560.1417@0.23.2560.1417" timestamp="1599666329450" />
+    <state x="945" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1599666164614">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="945" y="348" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1599666164614" />
+  </component>
+</project>
