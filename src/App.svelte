@@ -68,9 +68,15 @@
 
   main {
     max-width: min(80vw, 800px);
-    margin: max(15vh, 200px) auto;
+    margin: min(10vh, 200px) auto;
     font-size: 1.5em;
     line-height: 1.5em;
+  }
+
+  @media screen and (max-width: 500px) {
+    main {
+      margin: 0 auto;
+    }
   }
 
   code {
