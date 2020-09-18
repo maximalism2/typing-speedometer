@@ -1,6 +1,7 @@
 // rollup.config.js
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
+import json from '@rollup/plugin-json'
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 
@@ -27,14 +28,14 @@ export default {
 
             // Optionally, preprocess components with svelte.preprocess:
             // https://svelte.dev/docs#svelte_preprocess
-            preprocess: {
-                style: ({ content }) => {
-                    return transformStyles(content);
-                }
-            },
+            // preprocess: {
+            //     style: ({ content }) => {
+            //         return transformStyles(content);
+            //     }
+            // },
 
             // Emit CSS as "files" for other plugins to process
-            emitCss: true,
+            // emitCss: true,
 
             // You can optionally set 'customElement' to 'true' to compile
             // your components to custom elements (aka web elements)
@@ -43,8 +44,8 @@ export default {
             // Extract CSS into a separate file (recommended).
             // See note below
             css: function (css) {
-                console.log(css.code); // the concatenated CSS
-                console.log(css.map); // a sourcemap
+                // console.log(css.code); // the concatenated CSS
+                // console.log(css.map); // a sourcemap
 
                 // creates `main.css` and `main.css.map`
                 // using a falsy name will default to the bundle name
@@ -68,6 +69,7 @@ export default {
         terser({
             compress: true,
             ecma: 2018
-        })
+        }),
+        json()
     ]
 }
