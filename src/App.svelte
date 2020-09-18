@@ -10,19 +10,30 @@
 
   const charSet = text.split("")
 
-  const minIndex = 0
-  const highlightedRangeStart = charSet.findIndex(
-    (char, index) => index > minIndex && char === " "
-  )
-  const highlightedRangeEnd =
-    charSet.slice(highlightedRangeStart + 1).findIndex((char) => char === " ") +
-    highlightedRangeStart +
-    1
+  let highlightedIndex = 0
 
   textStore.set({
-    highlightedRange: [highlightedRangeStart, highlightedRangeEnd],
+    highlightedIndex,
     text,
   })
+
+  $: {
+    textStore.update(state => ({...state, highlightedIndex }))
+  }
+
+  function moveCurrentHighlightedIndex(e) {
+    if (!e.ctrlKey && !e.metaKey) {
+      e.preventDefault()
+    } else {
+      return;
+    }
+
+    if (e.keyCode === 8) {
+      highlightedIndex = highlightedIndex - 1
+    } else {
+      highlightedIndex = highlightedIndex + 1
+    }
+  }
 </script>
 
 <style>
@@ -89,6 +100,8 @@
     opacity: 1;
   }
 </style>
+
+<svelte:window on:keydown={moveCurrentHighlightedIndex} />
 
 <main>
   <code>Index: {index}</code>

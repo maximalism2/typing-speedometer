@@ -1,24 +1,17 @@
 import { render, screen } from "@testing-library/svelte"
 import TextDisplay from "./TextDisplay.svelte"
+
 import { textStore } from "../../stores/textStore"
+import { highlightedIndexStore } from "../../stores/highlightedIndexStoere"
 
 describe("TextDisplay", () => {
   afterEach(() => {
-    textStore.set({ highlightedRange: [], text: "" })
+    textStore.set("Hello world!")
+    highlightedIndexStore.set(0)
   })
 
-  function updateStore(store, slice) {
-    store.update((currentState) => ({
-      ...currentState,
-      ...slice,
-    }))
-  }
-
   it("renders passed textStore", () => {
-    updateStore(textStore, {
-      highlightedRange: [8, 12],
-      text: "abcdefg shos zymno!",
-    })
+    textStore.set("abcdefg shos zymno!")
 
     const { container } = render(TextDisplay)
 
@@ -26,10 +19,10 @@ describe("TextDisplay", () => {
   })
 
   it("renders highlighted are when specified", () => {
-    updateStore(textStore, { highlightedRange: [0, 4], text: "Hello world!" })
+    highlightedIndexStore.set(4)
 
     render(TextDisplay)
 
-    expect(screen.getByTestId("highlighted-range")).toHaveTextContent("Hell")
+    expect(screen.getByTestId("highlighted-char")).toHaveTextContent("o")
   })
 })

@@ -1,33 +1,20 @@
 <script>
   import { textStore } from "../../stores/textStore"
+  import { highlightedIndexStore } from "../../stores/highlightedIndexStoere"
 
-  const { text, highlightedRange } = $textStore
-  const [highlightStart = 0, highlightEnd = 0] = highlightedRange
+  import Char from "../Char/Char.svelte"
 
-  const textHead = text.slice(0, highlightStart)
-  const highlightedText = text.slice(highlightStart, highlightEnd)
-  const textTail = text.slice(highlightEnd)
+  const highlightedIndex = $highlightedIndexStore
 </script>
 
-<style>
-  .textHead {
-    color: var(--text-head-color);
-  }
-
-  .highlightedRange {
-    color: var(--highlighted-text-color);
-    display: inline-flex;
-  }
-
-  .textTail {
-    color: var(--text-tail-color);
-  }
-</style>
-
 <p>
-  <span class="textHead">{textHead}</span>
-  <span class="highlightedRange" data-testId="highlighted-range">
-    {highlightedText}
-  </span>
-  <span class="textTail">{textTail}</span>
+  {#each $textStore.split('') as char, index}
+    <Char
+      {char}
+      highlightedChar={highlightedIndex === index}
+      headChar={index < highlightedIndex}
+      tailChar={highlightedIndex < index}
+      mistake={false}
+      correction={false} />
+  {/each}
 </p>
