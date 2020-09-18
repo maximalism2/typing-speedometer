@@ -1,5 +1,6 @@
 <script>
   import { textStore } from "./stores/textStore"
+  import { highlightedIndexStore } from "./stores/highlightedIndexStore"
 
   import TextDisplay from "./components/TextDisplay/TextDisplay.svelte"
 
@@ -10,28 +11,19 @@
 
   const charSet = text.split("")
 
-  let highlightedIndex = 0
-
-  textStore.set({
-    highlightedIndex,
-    text,
-  })
-
-  $: {
-    textStore.update(state => ({...state, highlightedIndex }))
-  }
+  textStore.set(text)
 
   function moveCurrentHighlightedIndex(e) {
     if (!e.ctrlKey && !e.metaKey) {
       e.preventDefault()
     } else {
-      return;
+      return
     }
 
     if (e.keyCode === 8) {
-      highlightedIndex = highlightedIndex - 1
+      highlightedIndexStore.update((i) => i - 1)
     } else {
-      highlightedIndex = highlightedIndex + 1
+      highlightedIndexStore.update((i) => i + 1)
     }
   }
 </script>

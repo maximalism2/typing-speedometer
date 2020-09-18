@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/svelte"
 import TextDisplay from "./TextDisplay.svelte"
 
 import { textStore } from "../../stores/textStore"
-import { highlightedIndexStore } from "../../stores/highlightedIndexStoere"
+import { highlightedIndexStore } from "../../stores/highlightedIndexStore"
 
 describe("TextDisplay", () => {
   afterEach(() => {

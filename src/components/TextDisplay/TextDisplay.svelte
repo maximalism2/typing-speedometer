@@ -1,19 +1,17 @@
 <script>
   import { textStore } from "../../stores/textStore"
-  import { highlightedIndexStore } from "../../stores/highlightedIndexStoere"
+  import { highlightedIndexStore } from "../../stores/highlightedIndexStore"
 
   import Char from "../Char/Char.svelte"
-
-  const highlightedIndex = $highlightedIndexStore
 </script>
 
 <p>
   {#each $textStore.split('') as char, index}
     <Char
       {char}
-      highlightedChar={highlightedIndex === index}
-      headChar={index < highlightedIndex}
-      tailChar={highlightedIndex < index}
+      highlightedChar={$highlightedIndexStore === index}
+      headChar={index < $highlightedIndexStore}
+      tailChar={$highlightedIndexStore < index}
       mistake={false}
       correction={false} />
   {/each}
