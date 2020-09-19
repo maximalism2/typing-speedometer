@@ -4,11 +4,8 @@ import json from "@rollup/plugin-json"
 import typescript from "@rollup/plugin-typescript"
 import livereload from "rollup-plugin-livereload"
 import { terser } from "rollup-plugin-terser"
-import { sveltePreprocess } from "svelte-preprocess/dist/autoProcess"
-import autoprefixer from "autoprefixer"
 
-const production = process.env.NODE_ENV === "production"
-const sourceMap = !production
+const svelteConfig = require("./svelte.config")
 
 export default {
   input: "src/main.js",
@@ -19,24 +16,11 @@ export default {
   },
   plugins: [
     typescript(),
-    svelte({
-      preprocess: sveltePreprocess({
-        sourceMap,
-        postcss: {
-          plugins: [autoprefixer()],
-        },
-        defaults: {
-          script: "typescript",
-        },
-      }),
-      css: function (css) {
-        css.write("main.css")
-      },
-    }),
+    svelte(svelteConfig),
     resolve(),
     livereload(),
     terser({
-      compress: production,
+      compress: true,
       ecma: 2018,
     }),
     json(),

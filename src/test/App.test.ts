@@ -1,10 +1,14 @@
-import App from '../App.svelte'
-import { render, screen } from "@testing-library/svelte";
-import userEvent from "@testing-library/user-event";
+import { render, screen } from "@testing-library/svelte"
+import userEvent from "@testing-library/user-event"
+import App from "../App.svelte"
 
-describe('App', () => {
-    xit('renders counter with 0 by default', () => {
-        render(App)
+jest.mock("../utils/textsBase", () => ({
+  __esModule: true,
+  getRandomText: () => "Random text",
+}))
 
-    })
-});
+describe("App", () => {
+  it("renders text", () => {
+    render(App)
+  })
+})

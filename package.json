@@ -17,6 +17,7 @@
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
@@ -45,10 +46,13 @@
       "./scripts/testsSetup.js"
     ],
     "transform": {
-      "^.+\\.svelte$": "svelte-jester",
-      "^.+\\.js$": "babel-jest"
+      "^.+\\.svelte$": ["svelte-jester", {
+        "preprocess": true
+      }],
+      "^.+\\.(j|t)s$": "babel-jest"
     },
     "moduleFileExtensions": [
+      "ts",
       "js",
       "svelte"
     ]

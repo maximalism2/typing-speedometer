@@ -1,24 +1,11 @@
 <script>
   import { textStore } from "./stores/textStore"
   import { highlightedIndexStore } from "./stores/highlightedIndexStore"
+  import { getRandomText } from "./utils/textsBase"
 
   import TextDisplay from "./components/TextDisplay/TextDisplay.svelte"
 
-  import textsBase from "./textsBase.json"
-
-  const index = Math.floor(Math.random() * textsBase.length)
-  const text = textsBase[index]
-
-  textStore.set(text)
-
-  const excludedKeys = new Set([
-    "Shift",
-    "Meta",
-    "Control",
-    "Alt",
-    "Enter",
-    "Tab",
-  ])
+  textStore.set(getRandomText())
 
   function handleKeypress(e: KeyboardEvent) {
     console.log(`Key downed with ${e.key}`)
@@ -27,10 +14,6 @@
   }
 
   function moveCurrentHighlightedIndex(e: KeyboardEvent) {
-    if (excludedKeys.has(e.key)) {
-      return
-    }
-
     e.preventDefault()
     highlightedIndexStore.update((i) => i + 1)
   }
@@ -96,24 +79,14 @@
       margin: 0 auto;
     }
   }
-
-  code {
-    opacity: 0;
-    color: var(--grey-6);
-    background: var(--grey-2);
-  }
-
-  code:hover {
-    opacity: 1;
-  }
 </style>
 
 <main on:click={handleMousedown}>
-  <code>Index: {index}</code>
   <input
     bind:this={input}
     type="text"
     on:keypress={handleKeypress}
+    autofocus
     style="opacity: 0; position: fixed; left: 0; top: 0; transform: scale(0); transform-origin: 0 0;" />
   <TextDisplay />
 </main>
