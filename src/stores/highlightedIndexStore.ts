@@ -1,5 +1,5 @@
-import { writable } from "svelte/store"
+import { Writable, writable } from "svelte/store"
 
-console.debug("highlighted index store initialized")
+export type HighlightedIndexStore = Writable<number>
 
-export const highlightedIndexStore = writable(0)
+export const highlightedIndexStore: HighlightedIndexStore = writable(0)

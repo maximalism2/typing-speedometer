@@ -1,5 +1,4 @@
 <script>
-  import { onDestroy } from "svelte"
   import { textStore } from "./stores/textStore"
   import { highlightedIndexStore } from "./stores/highlightedIndexStore"
   import { getRandomText } from "./utils/textsBase"
@@ -15,20 +14,11 @@
 
   function moveCurrentHighlightedIndex(e: KeyboardEvent) {
     e.preventDefault()
-    highlightedIndexStore.update((i) => {
-      console.log(`${e.key} ${i} => ${i + 1}`)
-      return i + 1
-    })
+    highlightedIndexStore.update((i) => i + 1)
   }
 
-  console.log("initialized")
-  onDestroy(() => console.log("destroyer"))
-
   function handleBackspace() {
-    highlightedIndexStore.update((i) => {
-      // console.log("should move backward", i - 1)
-      return i - 1
-    })
+    highlightedIndexStore.update((i) => i - 1)
   }
 
   let input: HTMLInputElement = null

@@ -3,6 +3,8 @@ import userEvent from "@testing-library/user-event"
 import App from "../App.svelte"
 import { simulateTyping } from "../utils/simulateTyping"
 
+jest.mock("../stores/highlightedIndexStore")
+
 jest.mock("../utils/textsBase", () => ({
   __esModule: true,
   getRandomText: () => "Random text",

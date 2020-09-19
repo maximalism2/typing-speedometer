@@ -55,8 +55,7 @@
       "ts",
       "js",
       "svelte"
-    ],
-    "resetModules": true
+    ]
   },
   "prettier": {
     "semi": false,
