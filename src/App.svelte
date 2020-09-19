@@ -1,25 +1,38 @@
 <script>
+  import { onDestroy } from "svelte"
   import { textStore } from "./stores/textStore"
   import { highlightedIndexStore } from "./stores/highlightedIndexStore"
   import { getRandomText } from "./utils/textsBase"
 
   import TextDisplay from "./components/TextDisplay/TextDisplay.svelte"
+  import UtilityInput from "./components/UtilityInput/UtilityInput.svelte"
 
   textStore.set(getRandomText())
 
   function handleKeypress(e: KeyboardEvent) {
-    console.log(`Key downed with ${e.key}`)
-
     moveCurrentHighlightedIndex(e)
   }
 
   function moveCurrentHighlightedIndex(e: KeyboardEvent) {
     e.preventDefault()
-    highlightedIndexStore.update((i) => i + 1)
+    highlightedIndexStore.update((i) => {
+      console.log(`${e.key} ${i} => ${i + 1}`)
+      return i + 1
+    })
   }
 
-  let input: HTMLInputElement
-  function handleMousedown() {
+  console.log("initialized")
+  onDestroy(() => console.log("destroyer"))
+
+  function handleBackspace() {
+    highlightedIndexStore.update((i) => {
+      // console.log("should move backward", i - 1)
+      return i - 1
+    })
+  }
+
+  let input: HTMLInputElement = null
+  function focusUtilityInput() {
     if (input) {
       input.focus()
     }
@@ -81,12 +94,12 @@
   }
 </style>
 
-<main on:click={handleMousedown}>
-  <input
-    bind:this={input}
-    type="text"
+<svelte:window on:keydown={focusUtilityInput} />
+
+<main>
+  <UtilityInput
+    bind:ref={input}
     on:keypress={handleKeypress}
-    autofocus
-    style="opacity: 0; position: fixed; left: 0; top: 0; transform: scale(0); transform-origin: 0 0;" />
+    on:backspace={handleBackspace} />
   <TextDisplay />
 </main>
