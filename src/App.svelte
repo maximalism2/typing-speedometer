@@ -9,21 +9,36 @@
   const index = Math.floor(Math.random() * textsBase.length)
   const text = textsBase[index]
 
-  const charSet = text.split("")
-
   textStore.set(text)
 
-  function moveCurrentHighlightedIndex(e) {
-    if (!e.ctrlKey && !e.metaKey) {
-      e.preventDefault()
-    } else {
+  const excludedKeys = new Set([
+    "Shift",
+    "Meta",
+    "Control",
+    "Alt",
+    "Enter",
+    "Tab",
+  ])
+
+  function handleKeypress(e: KeyboardEvent) {
+    console.log(`Key downed with ${e.key}`)
+
+    moveCurrentHighlightedIndex(e)
+  }
+
+  function moveCurrentHighlightedIndex(e: KeyboardEvent) {
+    if (excludedKeys.has(e.key)) {
       return
     }
 
-    if (e.keyCode === 8) {
-      highlightedIndexStore.update((i) => i - 1)
-    } else {
-      highlightedIndexStore.update((i) => i + 1)
+    e.preventDefault()
+    highlightedIndexStore.update((i) => i + 1)
+  }
+
+  let input: HTMLInputElement
+  function handleMousedown() {
+    if (input) {
+      input.focus()
     }
   }
 </script>
@@ -93,9 +108,12 @@
   }
 </style>
 
-<svelte:window on:keydown={moveCurrentHighlightedIndex} />
-
-<main>
+<main on:click={handleMousedown}>
   <code>Index: {index}</code>
+  <input
+    bind:this={input}
+    type="text"
+    on:keypress={handleKeypress}
+    style="opacity: 0; position: fixed; left: 0; top: 0; transform: scale(0); transform-origin: 0 0;" />
   <TextDisplay />
 </main>

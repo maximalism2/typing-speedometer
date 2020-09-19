@@ -20,6 +20,7 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-typescript": "^6.0.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/svelte": "^3.0.0",
     "@testing-library/user-event": "^12.1.4",
@@ -35,7 +36,9 @@
     "rollup-plugin-terser": "^7.0.2",
     "serve": "^11.3.2",
     "svelte-jester": "^1.1.5",
-    "svelte-preprocess": "^4.3.0"
+    "svelte-preprocess": "^4.3.0",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.2"
   },
   "jest": {
     "setupFilesAfterEnv": [
