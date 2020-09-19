@@ -5,7 +5,7 @@
   import Char from "../Char/Char.svelte"
 </script>
 
-<p>
+<p data-testId="text-display">
   {#each $textStore.split('') as char, index}
     <Char
       {char}

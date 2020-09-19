@@ -10,5 +10,9 @@ jest.mock("../utils/textsBase", () => ({
 describe("App", () => {
   it("renders text", () => {
     render(App)
+
+    const textDisplay = screen.getByTestId("text-display")
+    expect(textDisplay).toBeInTheDocument()
+    expect(textDisplay).toHaveTextContent("Random text")
   })
 })
