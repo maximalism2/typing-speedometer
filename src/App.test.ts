@@ -111,6 +111,6 @@ describe("App", () => {
     await simulateTyping("Random{space}text.", 5700)
 
     // Matching for ~5000 chars/min, because of loose delay tolerances
-    expect(screen.getByText(/5\d\d\d\schars\/min/)).toBeInTheDocument()
+    expect(screen.getByText(/[4-5]\d\d\d\schars\/min/)).toBeInTheDocument()
   })
 })
