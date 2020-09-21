@@ -10,11 +10,18 @@
 
   textStore.set(getRandomText())
 
+  let startedAt: Date = new Date()
+  let speed: number = 0
+
   function handleKeypress(e: KeyboardEvent) {
     e.preventDefault()
     const { key } = e
     const userInput = $userInputStore
     const highlightedIndex = $highlightedIndexStore
+
+    if ($highlightedIndexStore === 0) {
+      startedAt = new Date()
+    }
 
     if (
       highlightedIndex < userInput.length &&
@@ -50,6 +57,12 @@
   let textVisible = true
   $: {
     textVisible = $highlightedIndexStore < $textStore.length
+
+    if (!textVisible) {
+      const typingDuration = new Date() - startedAt
+      const min = 1000 * 60
+      speed = Math.floor(min / (typingDuration / $textStore.length))
+    }
   }
 </script>
 
@@ -120,5 +133,7 @@
       on:keypress={handleKeypress}
       on:backspace={handleBackspace} />
     <TextDisplay />
+  {:else}
+    <h3>{speed} chars/min</h3>
   {/if}
 </main>

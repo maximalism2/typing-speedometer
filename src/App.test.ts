@@ -106,4 +106,11 @@ describe("App", () => {
 
     expect(screen.queryByTestId("text-display")).toBe(null)
   })
+
+  it("displays the speed in chars per minute after the user finished typing", async () => {
+    await simulateTyping("Random{space}text.", 5700)
+
+    // Matching for ~5000 chars/min, because of loose delay tolerances
+    expect(screen.getByText(/5\d\d\d\schars\/min/)).toBeInTheDocument()
+  })
 })
