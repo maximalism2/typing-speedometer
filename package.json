@@ -28,6 +28,7 @@
     "@testing-library/user-event": "^12.1.4",
     "autoprefixer": "^10.0.0",
     "babel-jest": "^26.3.0",
+    "husky": "^4.3.0",
     "jest": "^26.4.2",
     "postcss": "^8.0.5",
     "prettier": "^2.1.2",
@@ -47,9 +48,12 @@
       "./scripts/testsSetup.js"
     ],
     "transform": {
-      "^.+\\.svelte$": ["svelte-jester", {
-        "preprocess": true
-      }],
+      "^.+\\.svelte$": [
+        "svelte-jester",
+        {
+          "preprocess": true
+        }
+      ],
       "^.+\\.(j|t)s$": "babel-jest"
     },
     "moduleFileExtensions": [
@@ -61,5 +65,10 @@
   "prettier": {
     "semi": false,
     "quoteProps": "preserve"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "scripts/pre-commit.sh"
+    }
   }
 }
