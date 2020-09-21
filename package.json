@@ -9,7 +9,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "serve public"
+    "start": "serve public",
+    "test": "jest"
   },
   "dependencies": {
     "svelte": "^3.24.1"

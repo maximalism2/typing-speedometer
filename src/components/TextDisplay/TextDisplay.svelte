@@ -5,22 +5,17 @@
 
   import Char from "../Char/Char.svelte"
 
-  import { getDisplayedChars } from "./utils"
-
-  let charsToDisplay: String[] = []
-  $: {
-    charsToDisplay = getDisplayedChars($userInputStore, $textStore)
-  }
+  import { hasMistake } from "./utils"
 </script>
 
 <p data-testId="text-display">
-  {#each charsToDisplay as char, index}
+  {#each $textStore.split('') as char, index}
     <Char
       {char}
       highlightedChar={$highlightedIndexStore === index}
       headChar={index < $highlightedIndexStore}
       tailChar={$highlightedIndexStore < index}
-      mistake={false}
+      mistake={hasMistake(char, index, $userInputStore)}
       correction={false} />
   {/each}
 </p>

@@ -1,12 +1,11 @@
 import { render, screen, fireEvent, cleanup } from "@testing-library/svelte"
-import userEvent from "@testing-library/user-event"
-import App from "../App.svelte"
-import { simulateTyping } from "../utils/simulateTyping"
+import App from "./App.svelte"
+import { simulateTyping } from "./utils/simulateTyping"
 
-jest.mock("../stores/highlightedIndexStore")
-jest.mock("../stores/userInputStore")
+jest.mock("./stores/highlightedIndexStore")
+jest.mock("./stores/userInputStore")
 
-jest.mock("../utils/textsBase", () => ({
+jest.mock("./utils/textsBase", () => ({
   __esModule: true,
   getRandomText: () => "Random text",
 }))
@@ -57,14 +56,12 @@ describe("App", () => {
     expect(getHighlightedChar()).toHaveTextContent("d")
   })
 
-  it("overrides displayed text with user's input", async () => {
-    await simulateTyping("Input{space}")
+  it("highlights mistakes in user's input", async () => {
+    await simulateTyping("Rondom{space}text")
 
-    expect(screen.getByTestId("text-display")).toHaveTextContent("Input text")
+    const mistakesCollection = getAllMistakes()
 
-    // const mistakesCollection = getAllMistakes()
-    //
-    // expect(mistakesCollection).toHaveLength(1)
-    // expect(mistakesCollection[0]).toHaveTextContent("o")
+    expect(mistakesCollection).toHaveLength(1)
+    expect(mistakesCollection[0]).toHaveTextContent("a")
   })
 })

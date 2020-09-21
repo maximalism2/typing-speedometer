@@ -5,6 +5,17 @@
   export let tailChar
   export let mistake
   export let correction
+
+  let testId = ""
+  $: {
+    if (highlightedChar) {
+      testId = "highlighted-char"
+    } else if (mistake) {
+      testId = "mistake-char"
+    } else {
+      testId = ""
+    }
+  }
 </script>
 
 <style>
@@ -24,12 +35,29 @@
   .tailChar {
     color: var(--text-tail-color);
   }
+
+  .mistake {
+    color: var(--mistake-color);
+    position: relative;
+  }
+
+  .mistake::after {
+    content: "";
+    position: absolute;
+    bottom: calc(50% - 0.8rem);
+    left: 0;
+    width: 100%;
+    background: var(--mistake-color);
+    opacity: 0.1;
+    height: 1.8rem;
+  }
 </style>
 
 <span
   class:headChar
   class:highlightedChar
   class:tailChar
-  data-testId={highlightedChar ? 'highlighted-char' : null}>
+  class:mistake
+  data-testId={testId}>
   {char}
 </span>

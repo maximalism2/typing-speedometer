@@ -1,4 +1,4 @@
-import { resetableStore } from "./resetableStore"
+import { resetableStore } from "../../utils/resetableStore"
 
 const storeModule = jest.requireActual("../highlightedIndexStore")
 

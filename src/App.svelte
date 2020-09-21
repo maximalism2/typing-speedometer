@@ -43,6 +43,8 @@
     --grey-6: #495057;
     --grey-7: #343a40;
     --grey-8: #212529;
+
+    --mistake-color: #ef233c;
   }
 
   :global(body) {
