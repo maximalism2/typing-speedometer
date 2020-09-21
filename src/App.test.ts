@@ -113,4 +113,16 @@ describe("App", () => {
     // Matching for ~5000 chars/min, because of loose delay tolerances
     expect(screen.getByText(/[4-5]\d\d\d\schars\/min/)).toBeInTheDocument()
   })
+
+  it("displays the number of mistakes", async () => {
+    await simulateTyping("Rondim{space}tyxt.")
+
+    expect(screen.getByText("3 mistakes")).toBeInTheDocument()
+  })
+
+  it("displays the number of corrections", async () => {
+    await simulateTyping("Randi{backspace}om{space}ty{backspace}ext.")
+
+    expect(screen.getByText("2 corrections")).toBeInTheDocument()
+  })
 })
