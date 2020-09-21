@@ -4,6 +4,7 @@ import App from "../App.svelte"
 import { simulateTyping } from "../utils/simulateTyping"
 
 jest.mock("../stores/highlightedIndexStore")
+jest.mock("../stores/userInputStore")
 
 jest.mock("../utils/textsBase", () => ({
   __esModule: true,
@@ -13,6 +14,10 @@ jest.mock("../utils/textsBase", () => ({
 describe("App", () => {
   function getHighlightedChar() {
     return screen.getByTestId("highlighted-char")
+  }
+
+  function getAllMistakes() {
+    return screen.getAllByTestId("mistake-char")
   }
 
   beforeEach(() => {
@@ -50,5 +55,16 @@ describe("App", () => {
     await simulateTyping("Random{backspace}{backspace}{backspace}")
 
     expect(getHighlightedChar()).toHaveTextContent("d")
+  })
+
+  it("overrides displayed text with user's input", async () => {
+    await simulateTyping("Input{space}")
+
+    expect(screen.getByTestId("text-display")).toHaveTextContent("Input text")
+
+    // const mistakesCollection = getAllMistakes()
+    //
+    // expect(mistakesCollection).toHaveLength(1)
+    // expect(mistakesCollection[0]).toHaveTextContent("o")
   })
 })

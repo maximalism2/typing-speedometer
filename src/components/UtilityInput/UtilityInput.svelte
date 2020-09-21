@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte"
 
+  export let value: string = ""
   export let ref: HTMLInputElement
 
   const dispatch = createEventDispatcher()
@@ -14,6 +15,7 @@
 <input
   on:keypress
   on:keydown={handleKeydown}
+  bind:value
   bind:this={ref}
   type="text"
   style="opacity: 0; position: fixed; left: 0; top: 0; transform: scale(0); transform-origin: 0 0;"

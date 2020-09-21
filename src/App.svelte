@@ -1,6 +1,7 @@
 <script>
   import { textStore } from "./stores/textStore"
   import { highlightedIndexStore } from "./stores/highlightedIndexStore"
+  import { userInputStore } from "./stores/userInputStore"
   import { getRandomText } from "./utils/textsBase"
 
   import TextDisplay from "./components/TextDisplay/TextDisplay.svelte"
@@ -9,6 +10,7 @@
   textStore.set(getRandomText())
 
   function handleKeypress(e: KeyboardEvent) {
+    userInputStore.update((value) => value + e.key)
     moveCurrentHighlightedIndex(e)
   }
 
@@ -18,6 +20,7 @@
   }
 
   function handleBackspace() {
+    userInputStore.update((value) => value.slice(0, -1))
     highlightedIndexStore.update((i) => i - 1)
   }
 
