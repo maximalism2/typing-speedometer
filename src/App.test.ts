@@ -8,7 +8,7 @@ jest.mock("./stores/correctedCharsIndicesStore")
 
 jest.mock("./utils/textsBase", () => ({
   __esModule: true,
-  getRandomText: () => "Random text",
+  getRandomText: () => "Random text.",
 }))
 
 describe("App", () => {
@@ -28,7 +28,7 @@ describe("App", () => {
   it("renders text", () => {
     const textDisplay = screen.getByTestId("text-display")
     expect(textDisplay).toBeInTheDocument()
-    expect(textDisplay).toHaveTextContent("Random text")
+    expect(textDisplay).toHaveTextContent("Random text.")
   })
 
   it("marks the first letter as current highlighted char", () => {
@@ -95,5 +95,15 @@ describe("App", () => {
     expect(screen.getAllByTestId("corrected-char")).toHaveLength(1)
     await simulateTyping("{backspace}{backspace}{backspace}{backspace}")
     expect(screen.queryAllByTestId("corrected-char")).toHaveLength(0)
+  })
+
+  it("hides the text after the last character is typed", async () => {
+    await simulateTyping("Random{space}")
+
+    expect(screen.queryByTestId("text-display")).toBeInTheDocument()
+
+    await simulateTyping("text.")
+
+    expect(screen.queryByTestId("text-display")).toBe(null)
   })
 })

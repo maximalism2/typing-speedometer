@@ -46,6 +46,11 @@
       input.focus()
     }
   }
+
+  let textVisible = true
+  $: {
+    textVisible = $highlightedIndexStore < $textStore.length
+  }
 </script>
 
 <style>
@@ -109,9 +114,11 @@
 <svelte:window on:keydown={focusUtilityInput} />
 
 <main>
-  <UtilityInput
-    bind:ref={input}
-    on:keypress={handleKeypress}
-    on:backspace={handleBackspace} />
-  <TextDisplay />
+  {#if textVisible}
+    <UtilityInput
+      bind:ref={input}
+      on:keypress={handleKeypress}
+      on:backspace={handleBackspace} />
+    <TextDisplay />
+  {/if}
 </main>
