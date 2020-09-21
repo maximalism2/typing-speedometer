@@ -1,11 +1,12 @@
 <script>
   import { textStore } from "../../stores/textStore"
   import { userInputStore } from "../../stores/userInputStore"
+  import { correctedCharsIndicesStore } from "../../stores/correctedCharsIndicesStore"
   import { highlightedIndexStore } from "../../stores/highlightedIndexStore"
 
   import Char from "../Char/Char.svelte"
 
-  import { hasMistake } from "./utils"
+  import { hasMistake, hasCorrection } from "./utils"
 </script>
 
 <p data-testId="text-display">
@@ -15,7 +16,7 @@
       highlightedChar={$highlightedIndexStore === index}
       headChar={index < $highlightedIndexStore}
       tailChar={$highlightedIndexStore < index}
-      mistake={hasMistake(char, index, $userInputStore)}
-      correction={false} />
+      mistake={hasMistake(char, index, $userInputStore, $highlightedIndexStore)}
+      correction={hasCorrection(index, $correctedCharsIndicesStore, $highlightedIndexStore)} />
   {/each}
 </p>

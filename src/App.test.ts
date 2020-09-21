@@ -1,9 +1,10 @@
-import { render, screen, fireEvent, cleanup } from "@testing-library/svelte"
+import { cleanup, fireEvent, render, screen } from "@testing-library/svelte"
 import App from "./App.svelte"
 import { simulateTyping } from "./utils/simulateTyping"
 
 jest.mock("./stores/highlightedIndexStore")
 jest.mock("./stores/userInputStore")
+jest.mock("./stores/correctedCharsIndicesStore")
 
 jest.mock("./utils/textsBase", () => ({
   __esModule: true,
@@ -13,10 +14,6 @@ jest.mock("./utils/textsBase", () => ({
 describe("App", () => {
   function getHighlightedChar() {
     return screen.getByTestId("highlighted-char")
-  }
-
-  function getAllMistakes() {
-    return screen.getAllByTestId("mistake-char")
   }
 
   beforeEach(() => {
@@ -57,11 +54,40 @@ describe("App", () => {
   })
 
   it("highlights mistakes in user's input", async () => {
-    await simulateTyping("Rondom{space}text")
+    await simulateTyping("Rondom{space}tixt") // Should've been "Random text"
 
-    const mistakesCollection = getAllMistakes()
+    const mistakesCollection = screen.getAllByTestId("mistake-char")
 
-    expect(mistakesCollection).toHaveLength(1)
+    expect(mistakesCollection).toHaveLength(2)
     expect(mistakesCollection[0]).toHaveTextContent("a")
+    expect(mistakesCollection[1]).toHaveTextContent("e")
+  })
+
+  it("removes the mistake highlight when user erases the mistake", async () => {
+    await simulateTyping("Ranin")
+
+    expect(screen.getAllByTestId("mistake-char")).toHaveLength(2)
+    await simulateTyping("{backspace}{backspace}")
+    expect(screen.queryAllByTestId("mistake-char")).toHaveLength(0)
+  })
+
+  it("highlights corrections in user's input", async () => {
+    await simulateTyping(
+      "Randim{backspace}{backspace}om{space}texf{backspace}t"
+    )
+
+    const correctionsCollection = screen.getAllByTestId("corrected-char")
+
+    expect(correctionsCollection).toHaveLength(2)
+    expect(correctionsCollection[0]).toHaveTextContent("o")
+    expect(correctionsCollection[1]).toHaveTextContent("t")
+  })
+
+  it("removes the correction highlight when user returns back in the text", async () => {
+    await simulateTyping("Randon{backspace}m")
+
+    expect(screen.getAllByTestId("corrected-char")).toHaveLength(1)
+    await simulateTyping("{backspace}{backspace}{backspace}{backspace}")
+    expect(screen.queryAllByTestId("corrected-char")).toHaveLength(0)
   })
 })

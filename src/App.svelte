@@ -2,6 +2,7 @@
   import { textStore } from "./stores/textStore"
   import { highlightedIndexStore } from "./stores/highlightedIndexStore"
   import { userInputStore } from "./stores/userInputStore"
+  import { correctedCharsIndicesStore } from "./stores/correctedCharsIndicesStore"
   import { getRandomText } from "./utils/textsBase"
 
   import TextDisplay from "./components/TextDisplay/TextDisplay.svelte"
@@ -10,17 +11,32 @@
   textStore.set(getRandomText())
 
   function handleKeypress(e: KeyboardEvent) {
-    userInputStore.update((value) => value + e.key)
-    moveCurrentHighlightedIndex(e)
-  }
-
-  function moveCurrentHighlightedIndex(e: KeyboardEvent) {
     e.preventDefault()
-    highlightedIndexStore.update((i) => i + 1)
+    const { key } = e
+    const userInput = $userInputStore
+    const highlightedIndex = $highlightedIndexStore
+
+    if (
+      highlightedIndex < userInput.length &&
+      userInput[highlightedIndex] !== key
+    ) {
+      const correctedInput =
+        userInput.slice(0, highlightedIndex) +
+        key +
+        userInput.slice(highlightedIndex + 1)
+
+      userInputStore.set(correctedInput)
+      correctedCharsIndicesStore.update((collection) =>
+        collection.concat(highlightedIndex)
+      )
+    } else if (userInput[highlightedIndex] !== key) {
+      userInputStore.set(userInput + key)
+    }
+
+    highlightedIndexStore.set(highlightedIndex + 1)
   }
 
   function handleBackspace() {
-    userInputStore.update((value) => value.slice(0, -1))
     highlightedIndexStore.update((i) => i - 1)
   }
 
@@ -45,6 +61,7 @@
     --grey-8: #212529;
 
     --mistake-color: #ef233c;
+    --correction-color: #f9c74f;
   }
 
   :global(body) {

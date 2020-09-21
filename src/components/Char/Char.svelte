@@ -12,6 +12,8 @@
       testId = "highlighted-char"
     } else if (mistake) {
       testId = "mistake-char"
+    } else if (correction) {
+      testId = "corrected-char"
     } else {
       testId = ""
     }
@@ -36,20 +38,33 @@
     color: var(--text-tail-color);
   }
 
+  .correction {
+    color: var(--correction-color);
+    position: relative;
+  }
+
   .mistake {
     color: var(--mistake-color);
     position: relative;
   }
 
-  .mistake::after {
+  .mistake::after,
+  .correction::after {
     content: "";
     position: absolute;
     bottom: calc(50% - 0.8rem);
     left: 0;
     width: 100%;
-    background: var(--mistake-color);
     opacity: 0.1;
     height: 1.8rem;
+  }
+
+  .correction::after {
+    background: var(--correction-color);
+  }
+
+  .mistake::after {
+    background: var(--mistake-color);
   }
 </style>
 
@@ -58,6 +73,7 @@
   class:highlightedChar
   class:tailChar
   class:mistake
+  class:correction
   data-testId={testId}>
   {char}
 </span>
