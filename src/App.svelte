@@ -37,7 +37,7 @@
   }
 
   function handleBackspace() {
-    highlightedIndexStore.update((i) => i - 1)
+    highlightedIndexStore.update((i) => Math.max(i - 1, 0))
   }
 
   let input: HTMLInputElement = null

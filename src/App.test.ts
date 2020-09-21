@@ -53,6 +53,12 @@ describe("App", () => {
     expect(getHighlightedChar()).toHaveTextContent("d")
   })
 
+  it("does not move highlighted index backward if it highlights the first char", async () => {
+    await simulateTyping("{backspace}")
+
+    expect(getHighlightedChar()).toHaveTextContent("R")
+  })
+
   it("highlights mistakes in user's input", async () => {
     await simulateTyping("Rondom{space}tixt") // Should've been "Random text"
 
