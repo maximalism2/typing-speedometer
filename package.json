@@ -10,7 +10,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "serve public",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "svelte": "^3.24.1"
