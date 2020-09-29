@@ -1,0 +1,29 @@
+name: test_pr
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Setup node'
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: 'Install dependencies'
+        run: yarn
+
+      - name: 'Test'
+        env:
+          NODE_ENV: CI
+        run: yarn test:coverage
+
+      - name: 'Deploy coverage'
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
