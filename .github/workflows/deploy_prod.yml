@@ -42,6 +42,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: 'Cache node modules'
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+          YARN_CACHE_FOLDER: ~/.yarncache
+        with:
+          path: ~/.yarncache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       - name: 'Lists everything'
         run: pwd && ls -la .
 
