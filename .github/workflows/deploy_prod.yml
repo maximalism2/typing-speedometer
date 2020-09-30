@@ -40,6 +40,11 @@ jobs:
     needs: Build
 
     steps:
+      - uses: actions/checkout@v2
+
+      - name: 'Lists everything'
+        run: pwd && ls -la .
+
       - name: 'Test'
         env:
           NODE_ENV: CI
@@ -56,6 +61,7 @@ jobs:
     needs: Test
 
     steps:
+      - uses: actions/checkout@v2
       - name: 'Deploy to production'
         uses: amondnet/vercel-action@v19
         with:
