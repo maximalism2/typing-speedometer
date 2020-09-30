@@ -18,7 +18,7 @@ export default {
     typescript(),
     svelte(svelteConfig),
     resolve(),
-    livereload(),
+    process.env.NODE_ENV !== "production" && livereload(),
     terser({
       compress: true,
       ecma: 2018,
