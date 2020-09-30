@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  Build:
+  Build Test Deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,27 +34,6 @@ jobs:
           YARN_CACHE_FOLDER: ~/.yarncache
         run: yarn
 
-  Test:
-    runs-on: ubuntu-latest
-
-    needs: Build
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: 'Cache node modules'
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-          YARN_CACHE_FOLDER: ~/.yarncache
-        with:
-          path: ~/.yarncache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
       - name: 'Lists everything'
         run: pwd && ls -la .
 
@@ -68,13 +47,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-  Deploy:
-    runs-on: ubuntu-latest
+      - name: 'Build'
+        env:
+          NODE_ENV: production
+        run: yarn build
 
-    needs: Test
-
-    steps:
-      - uses: actions/checkout@v2
       - name: 'Deploy to production'
         uses: amondnet/vercel-action@v19
         with:
