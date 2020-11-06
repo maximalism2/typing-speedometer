@@ -1,3 +1,10 @@
-import { writable } from "svelte/store"
+import { Writable, writable } from "svelte/store"
 
-export const userInputStore = writable("")
+export type UserInput = {
+  key: string
+  timestamp: number
+}
+
+export type UserInputStore = Writable<UserInput>
+
+export const userInputStore = writable<UserInput[]>([])

@@ -125,4 +125,10 @@ describe("App", () => {
 
     expect(screen.getByText("2 corrections")).toBeInTheDocument()
   })
+
+  describe("Real time speedometer", () => {
+    it("renders speedometer with 0 char/min value by default", () => {
+      expect(screen.getByText("0 ch/min")).toBeInTheDocument()
+    })
+  })
 })

@@ -7,6 +7,7 @@
 
   import TextDisplay from "./components/TextDisplay/TextDisplay.svelte"
   import UtilityInput from "./components/UtilityInput/UtilityInput.svelte"
+  import Speedometer from "./components/Speedometer/Speedometer.svelte"
 
   textStore.set(getRandomText())
 
@@ -42,6 +43,12 @@
     }
 
     highlightedIndexStore.set(highlightedIndex + 1)
+
+    console.log({
+      $highlightedIndexStore,
+      $userInputStore,
+      $correctedCharsIndicesStore,
+    })
   }
 
   function handleBackspace() {
@@ -144,6 +151,7 @@
 
 <main>
   {#if textVisible}
+    <Speedometer />
     <UtilityInput
       bind:ref={input}
       on:keypress={handleKeypress}
