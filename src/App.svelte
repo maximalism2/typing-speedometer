@@ -1,9 +1,10 @@
 <script>
   import { textStore } from "./stores/textStore"
   import { highlightedIndexStore } from "./stores/highlightedIndexStore"
-  import { userInputStore } from "./stores/userInputStore"
+  import { UserInput, userInputStore } from "./stores/userInputStore"
   import { correctedCharsIndicesStore } from "./stores/correctedCharsIndicesStore"
   import { getRandomText } from "./utils/textsBase"
+  import { getCurrentTimestamp } from "./utils/getCurrentTimestamp"
 
   import TextDisplay from "./components/TextDisplay/TextDisplay.svelte"
   import UtilityInput from "./components/UtilityInput/UtilityInput.svelte"
@@ -18,7 +19,7 @@
   function handleKeypress(e: KeyboardEvent) {
     e.preventDefault()
     const { key } = e
-    const userInput = $userInputStore
+    const userInput: UserInput[] = $userInputStore
     const highlightedIndex = $highlightedIndexStore
 
     if ($highlightedIndexStore === 0) {
@@ -27,19 +28,25 @@
 
     if (
       highlightedIndex < userInput.length &&
-      userInput[highlightedIndex] !== key
+      userInput[highlightedIndex] &&
+      userInput[highlightedIndex].key !== key
     ) {
-      const correctedInput =
-        userInput.slice(0, highlightedIndex) +
-        key +
-        userInput.slice(highlightedIndex + 1)
+      const correctedInput = userInput
+        .slice(0, highlightedIndex)
+        .concat({
+          key,
+          timestamp: getCurrentTimestamp(),
+        })
+        .concat(userInput.slice(highlightedIndex + 1))
 
       userInputStore.set(correctedInput)
       correctedCharsIndicesStore.update((collection) =>
         collection.concat(highlightedIndex)
       )
     } else if (userInput[highlightedIndex] !== key) {
-      userInputStore.set(userInput + key)
+      userInputStore.set(
+        userInput.concat({ key, timestamp: getCurrentTimestamp() })
+      )
     }
 
     highlightedIndexStore.set(highlightedIndex + 1)

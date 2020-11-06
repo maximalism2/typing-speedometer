@@ -2,16 +2,24 @@
   import { getCurrentTimestamp } from "../../utils/getCurrentTimestamp"
   import { userInputStore, UserInput } from "../../stores/userInputStore"
 
+  function truncateKeystrokes(keyStrokes: UserInput[], startTimestamp: number): UserInput[] {
+    return keyStrokes.filter(stroke => stroke.timestamp >= startTimestamp)
+  }
+
   function getSpeed(keyStrokes: UserInput[]): number {
-    let speed = 0
-    let median
+    const minute = 1000 * 60;
     const now = getCurrentTimestamp()
 
-    for (const stroke of keyStrokes) {
-      console.log(new Date(stroke.timestamp))
+    const truncatedKeystrokes = truncateKeystrokes(keyStrokes, now - 5000)
+
+    const first = truncatedKeystrokes[0]
+    const last = truncatedKeystrokes[truncatedKeystrokes.length - 1]
+
+    if (!first || !last) {
+      return 0
     }
 
-    return speed
+    return Math.round(minute / ((last.timestamp - first.timestamp) / (truncatedKeystrokes.length - 1)))
   }
 </script>
 
