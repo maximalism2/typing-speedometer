@@ -60,7 +60,7 @@ describe("App", () => {
   })
 
   it("highlights mistakes in user's input", async () => {
-    await simulateTyping("Rondom{space}tixt") // Should've been "Random text"
+    await simulateTyping("Rondom{space}tixt") // Should be "Random text"
 
     const mistakesCollection = screen.getAllByTestId("mistake-char")
 

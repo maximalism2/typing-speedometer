@@ -17,6 +17,6 @@
       headChar={index < $highlightedIndexStore}
       tailChar={$highlightedIndexStore < index}
       mistake={hasMistake(char, index, $userInputStore, $highlightedIndexStore)}
-      correctijjon={hasCorrection(index, $correctedCharsIndicesStore, $highlightedIndexStore)} />
+      correction={hasCorrection(index, $correctedCharsIndicesStore, $highlightedIndexStore)} />
   {/each}
 </p>

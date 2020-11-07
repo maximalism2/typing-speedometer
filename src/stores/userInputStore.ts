@@ -5,6 +5,6 @@ export type UserInput = {
   timestamp: number
 }
 
-export type UserInputStore = Writable<UserInput>
+export type UserInputStore = Writable<UserInput[]>
 
-export const userInputStore = writable<UserInput[]>([])
+export const userInputStore: UserInputStore = writable([])

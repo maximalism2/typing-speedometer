@@ -1,13 +1,15 @@
+import { UserInput } from "../../stores/userInputStore"
+
 export function hasMistake(
   char: string,
   index: number,
-  userInput: string,
+  userInput: UserInput[],
   highlightedIndex: number
 ): boolean {
   return (
     index < highlightedIndex &&
     index < userInput.length &&
-    userInput[index] !== char
+    userInput[index].key !== char
   )
 }
 
