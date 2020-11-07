@@ -6,7 +6,7 @@ import { getCurrentTimestamp } from "../../utils/getCurrentTimestamp"
 jest.mock("../../stores/userInputStore")
 jest.mock("../../utils/getCurrentTimestamp")
 
-const getCurrentTimestampMock = (getCurrentTimestamp as jest.Mock<number>)
+const getCurrentTimestampMock = getCurrentTimestamp as jest.Mock<number>
 
 describe("Speedometer", () => {
   const now = Number(Date.parse("2020-08-02T12:00"))
@@ -42,14 +42,16 @@ describe("Speedometer", () => {
   it("it ignores any keystroke older than 5 sec", () => {
     getCurrentTimestampMock.mockReturnValue(now)
 
-    userInputStore.set(generateKeystrokesByTimestamps([now - 5001, now - 5000, now]))
+    userInputStore.set(
+      generateKeystrokesByTimestamps([now - 5001, now - 5000, now])
+    )
 
     render(Speedometer)
 
     expect(screen.getByText("12 ch/min")).toBeInTheDocument()
   })
 
-  it("renders 0 when there is only one keystroke over the last 5 seconds",  () => {
+  it("renders 0 when there is only one keystroke over the last 5 seconds", () => {
     getCurrentTimestampMock.mockReturnValue(now)
 
     userInputStore.set(generateKeystrokesByTimestamps([now - 5001, now]))
@@ -61,8 +63,8 @@ describe("Speedometer", () => {
 })
 
 function generateKeystrokesByTimestamps(timestamps: number[]): UserInput[] {
-  return timestamps.map(timestamp =>  ({
-    key: 'a',
+  return timestamps.map((timestamp) => ({
+    key: "a",
     timestamp,
   }))
 }
