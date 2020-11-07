@@ -1,44 +1,55 @@
 <script>
   import { textStore } from "./stores/textStore"
   import { highlightedIndexStore } from "./stores/highlightedIndexStore"
-  import { userInputStore } from "./stores/userInputStore"
+  import { UserInput, userInputStore } from "./stores/userInputStore"
   import { correctedCharsIndicesStore } from "./stores/correctedCharsIndicesStore"
   import { getRandomText } from "./utils/textsBase"
+  import { getCurrentTimestamp } from "./utils/getCurrentTimestamp"
 
   import TextDisplay from "./components/TextDisplay/TextDisplay.svelte"
   import UtilityInput from "./components/UtilityInput/UtilityInput.svelte"
+  import Speedometer from "./components/Speedometer/Speedometer.svelte"
 
   textStore.set(getRandomText())
 
-  let startedAt: Date = new Date()
+  let startedAt: number = Number(new Date())
   let speed: number = 0
   let mistakesCount: number = 0
 
   function handleKeypress(e: KeyboardEvent) {
     e.preventDefault()
     const { key } = e
-    const userInput = $userInputStore
+    const userInput: UserInput[] = $userInputStore
     const highlightedIndex = $highlightedIndexStore
 
     if ($highlightedIndexStore === 0) {
-      startedAt = new Date()
+      startedAt = Number(new Date())
     }
 
     if (
       highlightedIndex < userInput.length &&
-      userInput[highlightedIndex] !== key
+      userInput[highlightedIndex] &&
+      userInput[highlightedIndex].key !== key
     ) {
-      const correctedInput =
-        userInput.slice(0, highlightedIndex) +
-        key +
-        userInput.slice(highlightedIndex + 1)
+      const correctedInput = userInput
+        .slice(0, highlightedIndex)
+        .concat({
+          key,
+          timestamp: getCurrentTimestamp(),
+        })
+        .concat(userInput.slice(highlightedIndex + 1))
 
       userInputStore.set(correctedInput)
       correctedCharsIndicesStore.update((collection) =>
         collection.concat(highlightedIndex)
       )
-    } else if (userInput[highlightedIndex] !== key) {
-      userInputStore.set(userInput + key)
+    } else if (
+      !userInput[highlightedIndex] ||
+      userInput[highlightedIndex].key !== key
+    ) {
+      userInputStore.set(
+        userInput.concat({ key, timestamp: getCurrentTimestamp() })
+      )
     }
 
     highlightedIndexStore.set(highlightedIndex + 1)
@@ -60,14 +71,14 @@
     textVisible = $highlightedIndexStore < $textStore.length
 
     if (!textVisible) {
-      const typingDuration = new Date() - startedAt
+      const typingDuration = Number(new Date()) - startedAt
       const min = 1000 * 60
       speed = Math.floor(min / (typingDuration / $textStore.length))
-      mistakesCount = $textStore
+      mistakesCount = ($textStore as string)
         .split("")
         .reduce(
           (count, textChar, index) =>
-            $userInputStore[index] !== textChar ? count + 1 : count,
+            $userInputStore[index].key !== textChar ? count + 1 : count,
           0
         )
     }
@@ -142,8 +153,9 @@
 
 <svelte:window on:keydown={focusUtilityInput} />
 
-<main>
+<main on:click={focusUtilityInput}>
   {#if textVisible}
+    <Speedometer />
     <UtilityInput
       bind:ref={input}
       on:keypress={handleKeypress}

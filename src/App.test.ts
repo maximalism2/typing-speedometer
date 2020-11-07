@@ -60,7 +60,7 @@ describe("App", () => {
   })
 
   it("highlights mistakes in user's input", async () => {
-    await simulateTyping("Rondom{space}tixt") // Should've been "Random text"
+    await simulateTyping("Rondom{space}tixt") // Should be "Random text"
 
     const mistakesCollection = screen.getAllByTestId("mistake-char")
 
@@ -124,5 +124,11 @@ describe("App", () => {
     await simulateTyping("Randi{backspace}om{space}ty{backspace}ext.")
 
     expect(screen.getByText("2 corrections")).toBeInTheDocument()
+  })
+
+  describe("Real time speedometer", () => {
+    it("renders speedometer with 0 char/min value by default", () => {
+      expect(screen.getByText("0 ch/min")).toBeInTheDocument()
+    })
   })
 })
