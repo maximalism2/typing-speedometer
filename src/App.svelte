@@ -43,7 +43,10 @@
       correctedCharsIndicesStore.update((collection) =>
         collection.concat(highlightedIndex)
       )
-    } else if (!userInput[highlightedIndex] || userInput[highlightedIndex].key !== key) {
+    } else if (
+      !userInput[highlightedIndex] ||
+      userInput[highlightedIndex].key !== key
+    ) {
       userInputStore.set(
         userInput.concat({ key, timestamp: getCurrentTimestamp() })
       )
